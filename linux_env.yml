@@ -1,0 +1,32 @@
+name: cmip
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7.7
+  - ipywidgets=7.5.1
+  - python-decouple
+  - netcdf4
+  - gcc
+  - python-wget
+  - pandas=1.1.3
+  - plotly=4.11.0
+  - matplotlib=3.3.2
+  - scikit-image=0.14.1
+  - scikit-learn=0.20.1
+  - seaborn=0.9.0
+  - notebook=5.7.8
+  - regex
+  - pyyaml
+  - numexpr=2.6.8
+  - numpy=1.19.1
+  - numpy-base=1.19.1
+  - numpydoc=0.8.0
+  - scipy=1.5.2
+  - openblas
+  - pytest=4.4.1
+  - libblas=*=*openblas
+  - openpyxl
+  - pip
+  - pip:
+    - hublib

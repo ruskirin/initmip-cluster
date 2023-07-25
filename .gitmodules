@@ -1,0 +1,3 @@
+[submodule "ghub-utils"]
+	path = ghub-utils
+	url = git@github.com:GhubGateway/ghub-utils.git
