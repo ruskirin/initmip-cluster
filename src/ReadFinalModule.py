@@ -9,7 +9,7 @@ import numpy as np
 from netCDF4 import Dataset
 import yaml
 from pathlib import Path
-import files
+from ghub_utils import files
 
 
 def ReadFinal(top_dir, experiment, infield, step, models):

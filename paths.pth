@@ -1,0 +1,2 @@
+# add absolute path to ghub-utils, then copy file to your python's 'site-packages' directory
+# .../ghub-utils/

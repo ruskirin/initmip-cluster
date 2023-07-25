@@ -19,7 +19,7 @@ import pickle
 
 # from scipy.interpolate import griddata
 from ReadFinalModule import ReadFinal
-import files
+from ghub_utils import files, widgets
 from functools import partial
 
 # from sklearn.manifold import MDS
