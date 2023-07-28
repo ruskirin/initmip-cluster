@@ -1,4 +1,4 @@
-name: cmip
+name: cluster
 channels:
   - conda-forge
   - defaults

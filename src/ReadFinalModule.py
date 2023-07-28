@@ -61,18 +61,4 @@ def ReadFinal(top_dir, experiment, infield, step, models):
 
 
 if __name__ == '__main__':
-    # experiment = 'ctrl'
-    # fields = ['lithk']
-    # step = 21
-    #
-    # with open(files.DIR_PROJECT / 'conf.yml', 'r') as f:
-    #     y = yaml.safe_load(f)
-    #
-    #     models = list(y['model_paths'].keys())
-    #     # possible model exclusions
-    #     exclude = y['exclude']
-    #
-    # ReadFinal(
-    #     files.DIR_SESS_DATA / 'models', experiment, fields[0], step, models
-    # )
     import EOFandPlots

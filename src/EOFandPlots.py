@@ -64,8 +64,8 @@ dynamic_eof = ['velsurf', 'velbase', 'strbasemag']
 # fields = ['uvelsurf', 'vvelsurf', 'orog']
 # eof_fields = ['velsurf', 'orog']
 #
-# fields = ['uvelsurf', 'vvelsurf', 'orog', 'acabf']
-# eof_fields = ['velsurf', 'orog', 'acabf']
+fields = ['uvelsurf', 'vvelsurf', 'orog', 'acabf']
+eof_fields = ['velsurf', 'orog', 'acabf']
 #
 # use dhdt_exclude
 # fields = ['uvelsurf', 'vvelsurf', 'orog', 'acabf', 'dlithkdt']
@@ -111,7 +111,7 @@ dynamic_eof = ['velsurf', 'velbase', 'strbasemag']
 
 # fields = ['orog']
 # fields = ['uvelsurf', 'vvelsurf', 'lithk']
-fields = ['lithk']
+# fields = ['lithk']
 # fields = ['uvelsurf', 'vvelsurf']
 # fields = ['uvelbase', 'vvelbase']
 
@@ -125,7 +125,7 @@ fields = ['lithk']
 # # note that velsurf will be created later from uvelsurf, vvelsurf
 # eof_fields = ['velsurf', 'lithk']
 # eof_fields = ['orog']
-eof_fields = ['lithk']
+# eof_fields = ['lithk']
 # eof_fields = ['velsurf']
 # eof_fields = ['velbase']
 # eof_fields = ['topg']
