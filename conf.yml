@@ -37,9 +37,46 @@ model_paths:
   VUB-GISM2: VUB/GISM2
 exclude:
   # might sometimes want to exclude models for certain fields;
-  #   these models are isothermal or don't report all thermal fields
-  thermal: ['BGC-BISICLES1', 'BGC-BISICLES2', 'BGC-BISICLES3', 'IGE-ELMER1', 'IGE-ELMER2', 'JPL-ISSM']
+  #   these models are isothermal or dont report all thermal fields
+  thermal: [BGC-BISICLES1, BGC-BISICLES2, BGC-BISICLES3, IGE-ELMER1, IGE-ELMER2, JPL-ISSM]
   # DMI is the only model missing dlithkdt (dH/dt)
-  dhdt: ['DMI-PISM1', 'DMI-PISM2', 'DMI-PISM3', 'DMI-PISM4', 'DMI-PISM5']
-  libmassbf: ['IGE-ELMER1', 'IGE-ELMER2', 'ULB-FETISH1', 'ULB-FETISH2']
-  ghf: ['BGC-BISICLES1', 'BGC-BISICLES2', 'BGC-BISICLES3', 'IGE-ELMER1', 'IGE-ELMER2', 'IMAU-IMAUICE1', 'IMAU-IMAUICE2', 'IMAU-IMAUICE3', 'JPL-ISSM', 'VUB-GISM1', 'VUB-GISM2']
+  dhdt: [DMI-PISM1, DMI-PISM2, DMI-PISM3, DMI-PISM4, DMI-PISM5]
+  libmassbf: [IGE-ELMER1, IGE-ELMER2, ULB-FETISH1, ULB-FETISH2]
+  ghf: [BGC-BISICLES1, BGC-BISICLES2, BGC-BISICLES3, IGE-ELMER1, IGE-ELMER2, IMAU-IMAUICE1, IMAU-IMAUICE2, IMAU-IMAUICE3, JPL-ISSM, VUB-GISM1, VUB-GISM2]
+field_pairs:
+  acabf: acabf
+  dlithkdt: dlithkdt
+  #  libmassbf: libmassbf
+  litempbot: litempbot
+  litempsnic: litempsnic
+  lithk: lithk
+  orog: orog
+  strbasemag: strbasemag
+  #  hfgeoubed: hfgeoubed
+  velsurf: [uvelsurf, vvelsurf]
+  velbase: [uvelbase, vvelbase]
+run_fields:
+  - [acabf,]
+  - [dlithkdt,]
+  - [litempbot,]
+  - [litempsnic,]
+  - [lithk,]
+  - [orog,]
+  - [strbasemag,]
+    # - [hfgeoubed,]
+  - [velsurf,orog]
+  - [velsurf,orog,acabf]
+  - [velsurf,orog,acabf,dlithkdt]
+  - [velsurf,orog,acabf,litempsnic]
+  - [velbase,strbasemag]
+  - [velbase,strbasemag, litempbot]
+  - [acabf,dlithkdt]
+    # - [litempsnic,litempbot,hfgeoubed]
+  - [litempsnic,litempbot]
+  - [lithk,velsurf,acabf,velbase,strbasemag]
+experiments:
+  - ctrl
+  - init
+  - asmb
+# only applies for 'ctrl'/'asmb' experiments
+steps: 21
