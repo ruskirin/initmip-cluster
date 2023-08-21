@@ -1,0 +1,2 @@
+# add absolute path to ghub-utils, then copy file to your python's 'site-packages' directory. See example below and README for ghub-utils here: https://github.com/GhubGateway/ghub-utils .
+# /home/ruskirin/Documents/Projects/ghub/cluster/initmip-cluster/ghub-utils/
