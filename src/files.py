@@ -43,25 +43,37 @@ def filter_paths_terms(paths: List[Path], search: list, param: FileParams) -> li
     return filtered
 
 
+def netcdf_file_params(path: Path) -> namedtuple:
+    """Get field, model, and experiment from .nc filename"""
+    pat_file_params = r'(?P<field>\w+)_GIS_(?P<model>\w+_\w+)_(?P<exp>\w+).nc'
+
+    Params = namedtuple('Params', 'field model exp')
+
+    mat = re.search(pat_file_params, path.name)
+    if mat is not None:
+        model = mat.group('model').replace('_', '-')
+
+        return Params(mat.group('field'), model, mat.group('exp'))
+    else:
+        return None
+
+
 def intersect_netcdf_model_params(paths: List[Path]) -> namedtuple:
     """
-    Extract all unique fields, experiments, and models found in .nc filenames
+    Extract all common models found in .nc filenames across fields
 
     :param paths: list of netCDF4 file paths;
       NOTE: must follow pattern: <field>_GIS_<modelA>_<modelB>_<experiment>.nc
     :return: namedtuple of sets of models, experiments, and fields
     """
-    pat_file_params = r'(?P<field>\w+)_GIS_(?P<model>\w+_\w+)_(?P<exp>\w+).nc'
-
     fields = defaultdict(set)
     for p in paths:
         if p.suffix != '.nc':
             continue
 
-        mat = re.search(pat_file_params, p.name)
-        if mat is not None:
-            model = mat.group('model').replace('_', '-')
-            fields[mat.group('field')].add(model)
+        params = netcdf_file_params(p)
+        if params is not None:
+            fields[params.field].add(params.model)
 
     models = set.intersection(*fields.values())
     return models
@@ -75,8 +87,6 @@ def union_netcdf_params(paths: List[Path]) -> namedtuple:
       NOTE: must follow pattern: <field>_GIS_<modelA>_<modelB>_<experiment>.nc
     :return: namedtuple of sets of models, experiments, and fields
     """
-    pat_file_params = r'(?P<field>\w+)_GIS_(?P<model>\w+_\w+)_(?P<exp>\w+).nc'
-
     models = set()
     exps = set()
     fields = set()
@@ -85,13 +95,11 @@ def union_netcdf_params(paths: List[Path]) -> namedtuple:
         if p.suffix != '.nc':
             continue
 
-        mat = re.search(pat_file_params, p.name)
-        if mat is not None:
-            model = mat.group('model').replace('_', '-')
-
-            models.add(model)
-            exps.add(mat.group('exp'))
-            fields.add(mat.group('field'))
+        params = netcdf_file_params(p)
+        if params is not None:
+            models.add(params.model)
+            exps.add(params.exp)
+            fields.add(params.field)
 
     Params = namedtuple('Params', 'models exps fields')
     return Params(models, exps, fields)
@@ -209,8 +217,17 @@ def get_dirs_intersect(
 
 
 if __name__ == '__main__':
-    model_path = gfiles.DIR_SAMPLE_DATA / 'models'
-    files = list(model_path.rglob('*.nc'))
+    import analysis
 
-    filtered = filter_paths_terms(files, ['lithk', 'acabf'], FileParams.FIELD)
-    [print(f) for f in filtered]
+    print(analysis.FIELD_PAIRS)
+
+    grouped = analysis.group_fields(['litempbot','uvelbase','vvelbase','uvelsurf','vvelsurf'])
+    print(grouped)
+
+
+# if __name__ == '__main__':
+#     model_path = gfiles.DIR_SAMPLE_DATA / 'models'
+#     files = list(model_path.rglob('*.nc'))
+#
+#     filtered = filter_paths_terms(files, ['lithk', 'acabf'], FileParams.FIELD)
+#     [print(f) for f in filtered]

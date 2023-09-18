@@ -88,7 +88,14 @@ class FileSelectors(pwidg.HBox):
         border='solid'
     )
 
-    def __init__(self, dir_models: Path, **kwargs):
+    def __init__(self, dir_models: Path, groups: dict = None, **kwargs):
+        """
+        :param dir_models: 
+        :param groups: (optional) dictionary of 
+          {field: tuple of component fields} pairs; component fields are those
+          fields that always go together to form another field 
+        :param kwargs: 
+        """
         # recursively get all .nc files starting from @dir_models_a
         self._files_all = list(dir_models.rglob('*.nc'))
         self._features_all = mfiles.union_netcdf_params(self._files_all)
