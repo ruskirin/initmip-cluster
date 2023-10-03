@@ -1,8 +1,8 @@
 # Personal files
 data/models/*
 !data/models/.gitkeep
-data/out
-data/temp
+data/results/*
+data/temp/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

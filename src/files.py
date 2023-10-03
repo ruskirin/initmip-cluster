@@ -8,6 +8,9 @@ from ghub_utils.types import FileType
 from ghub_utils import files as gfiles
 
 
+DIR_MODELS = gfiles.DIR_SAMPLE_DATA / 'models'
+
+
 class FileParams(Enum):
     """netCDF file parameters"""
     MODEL = 'model'

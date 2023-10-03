@@ -5,6 +5,8 @@ Created on Wed Jun 20 12:10:19 2018
 
 @author: rtwalker
 """
+import os.path
+
 import numpy as np
 from netCDF4 import Dataset
 from collections import defaultdict, namedtuple
@@ -12,6 +14,7 @@ from pathlib import Path
 from typing import List
 
 import files as mfiles
+from ghub_utils import files as gfiles
 import analysis
 
 
@@ -32,7 +35,8 @@ def ReadFinal(field: str, paths: List[Path], step):
         model = params.model
         experiment = params.exp
 
-        U = Dataset(path)
+        path_abs = gfiles.DIR_PROJECT / path
+        U = Dataset(path_abs)
         u = U.variables[field][:]
 
         if i == 0:
@@ -126,9 +130,12 @@ def read_data(paths: List[Path]):
             # other exception cases
             exceptions[field].append(analysis.format_data_exc(e))
 
-    # get {field: models} map of models with no/bad data
+    # # get {field: models} map of models with no/bad data
+    # miss_data = analysis.test_valid_data(
+    #     params.models, eof_fields, variables
+    # )
     miss_data = analysis.test_valid_data(
-        params.models, eof_fields, variables
+        params.models, params.fields, variables
     )
 
     Output = namedtuple(
@@ -137,9 +144,9 @@ def read_data(paths: List[Path]):
     )
     return Output(
         models=params.models,
-        fields=params.fields,
+        fields=list(params.fields),
         eof_fields=eof_fields,
-        exps=params.exps,
+        exps=list(params.exps),
         xraw=X,
         yraw=Y,
         variables=variables,
